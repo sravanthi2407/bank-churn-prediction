@@ -40,7 +40,7 @@ h1,h2,h3{color:#e2e8f0}
 """, unsafe_allow_html=True)
 
 # ── Paths (relative — works anywhere) ────────────────────────────────────────
-DATA_PATH   = os.path.join(os.path.dirname(__file__), 'data', 'European_Bank.csv')
+DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'European_Bank.csv')
 MODELS_DIR  = os.path.join(os.path.dirname(__file__), 'models')
 REPORTS_DIR = os.path.join(os.path.dirname(__file__), 'reports')
 os.makedirs(MODELS_DIR, exist_ok=True)
