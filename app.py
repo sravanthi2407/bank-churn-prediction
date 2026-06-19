@@ -445,14 +445,12 @@ elif page == "📈 Analytics Dashboard":
         axes[1,0].set_title('Age Distribution',fontweight='bold')
         axes[1,0].legend(); axes[1,0].grid(axis='y',color='#334155')
 
-        # Balance boxplot
-        bp = axes[1,1].boxplot([retain['Balance']/1000, churn['Balance']/1000],
-                           labels=['Retained','Churned'], patch_artist=True,
-                           medianprops={'color':'#facc15','linewidth':2},
-                           whiskerprops={'color':'#94a3b8'}, capprops={'color':'#94a3b8'})
-        for patch, color in zip(bp['boxes'], CC):
-            patch.set_facecolor(color)
-            patch.set_alpha(0.55)
+        # Average Balance comparison (bar chart — no boxplot compatibility issues)
+        avg_bal = [retain['Balance'].mean()/1000, churn['Balance'].mean()/1000]
+        bars_b  = axes[1,1].bar(['Retained','Churned'], avg_bal, color=CC, edgecolor='#0f172a', width=0.5)
+        for b in bars_b:
+            axes[1,1].text(b.get_x()+b.get_width()/2, b.get_height()+0.5,
+                           f'€{b.get_height():.1f}K', ha='center', color='#e2e8f0', fontsize=11, fontweight='bold')
         axes[1,1].set_title('Balance by Churn Status',fontweight='bold')
         axes[1,1].set_ylabel('Balance (€000s)'); axes[1,1].grid(axis='y',color='#334155')
 
