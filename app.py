@@ -446,11 +446,13 @@ elif page == "📈 Analytics Dashboard":
         axes[1,0].legend(); axes[1,0].grid(axis='y',color='#334155')
 
         # Balance boxplot
-        axes[1,1].boxplot([retain['Balance']/1000, churn['Balance']/1000],
+        bp = axes[1,1].boxplot([retain['Balance']/1000, churn['Balance']/1000],
                            labels=['Retained','Churned'], patch_artist=True,
-                           boxprops={'facecolor':CC[1],'alpha':0.55},
                            medianprops={'color':'#facc15','linewidth':2},
                            whiskerprops={'color':'#94a3b8'}, capprops={'color':'#94a3b8'})
+        for patch, color in zip(bp['boxes'], CC):
+            patch.set_facecolor(color)
+            patch.set_alpha(0.55)
         axes[1,1].set_title('Balance by Churn Status',fontweight='bold')
         axes[1,1].set_ylabel('Balance (€000s)'); axes[1,1].grid(axis='y',color='#334155')
 
